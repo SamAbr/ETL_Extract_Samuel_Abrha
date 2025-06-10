@@ -1,7 +1,7 @@
 # Full vs. Incremental Extractions
 
-**Name:** Samuel Abrha Gebremariam
-**Student ID:** 670533
+**Name:** Samuel Abrha Gebremariam  
+**ID:** 670533
 
 ## 🔍 Project Description
 
