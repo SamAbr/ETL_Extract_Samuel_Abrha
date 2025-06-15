@@ -1,7 +1,7 @@
-# Full vs. Incremental Extractions
+# ETL Extract Lab
 
-**Name:** Samuel Abrha Gebremariam  
-**ID:** 670533
+**Name:** Samuel Abraha  
+**Student ID:** 2025XXXXX  
 
 ## 🔍 Project Description
 
@@ -25,19 +25,10 @@ This project demonstrates how to perform Full and Incremental Extraction as part
 
 1. Clone this repository.
 2. Open `etl_extract.ipynb` in Jupyter.
-3. Ensure all files are in the same directory.
+3. Ensure all files are in the same folder.
 4. Run all cells to see full and incremental extraction in action.
 
 ## 📊 Dataset
 
 - Source: Kaggle
 - Data: Google's stock prices over 5 years
-
-
-## Screenshots
-
-  ![image](https://github.com/user-attachments/assets/a3f5a003-c9aa-471d-b87a-2cc1cd6750cb)
-  ![image](https://github.com/user-attachments/assets/18ca725f-3ea1-44e5-b652-9c6fc27c0287)
-  ![image](https://github.com/user-attachments/assets/ae0f8663-db02-418f-8336-ec241124d855)
-  ![image](https://github.com/user-attachments/assets/f7ed4c6f-05b1-44b9-9861-3c389eb195e1)
-
