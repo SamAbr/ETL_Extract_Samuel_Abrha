@@ -1,7 +1,7 @@
 # Full vs. Incremental Extractions — ETL Project
 
 **Name:** Samuel Abrha Gebremariam  
-**ID:** 670533
+**ID:** ***533
 
 ---
 
@@ -14,6 +14,7 @@ The workflow involves:
 - Cleaning and transforming the data
 - Simulating an incremental update scenario
 - Saving both transformed datasets
+- Loading the datasets into structured formats using SQLite and Parquet
 
 ---
 
@@ -22,11 +23,16 @@ The workflow involves:
 | File | Description |
 |------|-------------|
 | `etl_extract.ipynb` | Main Jupyter Notebook containing extraction, transformation, and saving logic |
+| `etl_load.ipynb` | Loads transformed data into SQLite and Parquet formats |
 | `google_5yr_one.csv` | Original 5-year stock data for Google |
 | `last_extraction.txt` | Stores the timestamp of the last successful extraction |
 | `Download/transformed_full.csv` | Cleaned and transformed full dataset |
 | `Download/transformed_incremental.csv` | Transformed data representing new/updated entries |
-| `.gitignore` | Prevents tracking of unnecessary files |
+| `loaded_data/full_data.db` | SQLite database for full data |
+| `loaded_data/incremental_data.db` | SQLite database for incremental data |
+| `loaded_data/full_data.parquet` | Parquet file for full data |
+| `loaded_data/incremental_data.parquet` | Parquet file for incremental data |
+| `.gitignore` | Prevents tracking of unnecessary or large files like `.db`, `.parquet`, and `loaded_data/` |
 | `README.md` | This project overview and instructions |
 
 ---
@@ -35,6 +41,8 @@ The workflow involves:
 
 - Python
 - Pandas
+- SQLite3
+- Parquet (via pandas)
 - Jupyter Notebook
 - GitHub Desktop (for version control)
 
@@ -70,6 +78,8 @@ The workflow involves:
 - Structural: Convert data types, standardize date formats.
 - Categorization: Bin numerical values (binned the Close column)
 
+---
+
 ## Dataset
 
 - **Source**: Kaggle
@@ -84,12 +94,16 @@ The workflow involves:
 1. **Clone this repository** using GitHub Desktop or `git clone`.
 2. Ensure the following files are in the same directory:
    - `etl_extract.ipynb`
+   - `etl_load.ipynb`
    - `google_5yr_one.csv`
    - `last_extraction.txt`
 3. Launch **Jupyter Notebook** through Anaconda or VS Code.
 4. Open `etl_extract.ipynb` and run all cells to:
    - Perform full extraction and transformation
    - Simulate incremental extraction and update
+5. Open `etl_load.ipynb` and run all cells to:
+   - Load both datasets into SQLite databases
+   - Save the datasets as Parquet files
 
 ---
 
@@ -97,8 +111,31 @@ The workflow involves:
 
 - **Cleaned Full Dataset**: `Download/transformed_full.csv`
 - **Cleaned Incremental Dataset**: `Download/transformed_incremental.csv`
+- **SQLite Databases**:
+  - `loaded_data/full_data.db`
+  - `loaded_data/incremental_data.db`
+- **Parquet Files**:
+  - `loaded_data/full_data.parquet`
+  - `loaded_data/incremental_data.parquet`
 
 ---
+
+## Loading Details
+
+Both `transformed_full.csv` and `transformed_incremental.csv` were loaded into:
+
+| Dataset | SQLite Table | SQLite DB Path | Parquet Path |
+|---------|--------------|----------------|--------------|
+| Full | `full_data` | `loaded_data/full_data.db` | `loaded_data/full_data.parquet` |
+| Incremental | `incremental_data` | `loaded_data/incremental_data.db` | `loaded_data/incremental_data.parquet` |
+
+### Sample Code
+
+```python
+df_full = pd.read_csv("Download/transformed_full.csv")
+df_full.to_sql("full_data", sqlite3.connect("loaded_data/full_data.db"), if_exists="replace", index=False)
+df_full.to_parquet("loaded_data/full_data.parquet", index=False)
+```
 
 ## Learning Objectives Demonstrated
 
@@ -106,6 +143,8 @@ The workflow involves:
 - Full vs. incremental data pipeline logic
 - Use of conditions (`pd.cut`) for feature creation
 - Exporting structured data
+- Loading data into SQLite and Parquet formats
+- File structure organization and automation
 
 ---
 
